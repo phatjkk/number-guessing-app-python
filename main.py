@@ -3,7 +3,7 @@ from desk import Desk
 from house import House
 from player import Player
 
-isHack = True
+isHack = False
 
 def ClearConsole():
     os.system('cls')
