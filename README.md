@@ -1,8 +1,10 @@
 # number-guessing-app-python
 
-Clone project and terminal "python main.py" to run.
+Clone project and run in terminal "python main.py" to run.
 
 Set isHack = True to enable game cheat.
+
+Run unittest all "python -m unittest"
 
 Image Demo:
 
