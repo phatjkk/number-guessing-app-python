@@ -4,7 +4,7 @@ from desk import Desk
 from house import House
 from player import Player
 
-isHack = True
+isHack = False
 
 POINTS_TO_START = 30
 WINNER_POINTS = 1000
