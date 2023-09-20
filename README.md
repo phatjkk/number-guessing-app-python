@@ -4,6 +4,8 @@ Clone project and terminal "python main.py" to run.
 
 Set isHack = True to enable game cheat.
 
+Run unittest all "python -m unittest"
+
 Image Demo:
 
 ![image](https://github.com/phatjkk/number-guessing-app-python/assets/48487157/d1aa4d53-cd70-46ef-8516-3a83fbca5226)
