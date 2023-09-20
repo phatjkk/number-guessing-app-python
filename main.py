@@ -1,4 +1,5 @@
 import os
+import logging
 from desk import Desk
 from house import House
 from player import Player
@@ -73,7 +74,7 @@ def RoundFlow(roundNum:int,player:Player,house:House,desk:Desk,testValue:str = N
         try:
             playerGuess = RoundPage(roundNum,player,house,testValue)
         except Exception as e:
-            print(e)
+            logging.warning(e) 
             PauseConsole()
 
         if playerGuess == "1":
@@ -123,7 +124,7 @@ def WinRoundFlow(house:House,player:Player):
         try:
             playerOptionToStopOrContinues = WinRoundPage(house)
         except Exception as e:
-            print(e)
+            logging.warning(e) 
             PauseConsole()
 
         if playerOptionToStopOrContinues == "2":
@@ -163,7 +164,7 @@ if __name__ == "__main__":
         try:
             option = HomePage(player)
         except Exception as e:
-            print(e)
+            logging.warning(e) 
             PauseConsole()
 
         if option == "0":
