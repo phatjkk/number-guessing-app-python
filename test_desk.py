@@ -9,6 +9,6 @@ class TestDesk(unittest.TestCase):
     def test_GetRandomTwoCards(self):
          d = Desk()
          cardA, cardB = d.GetRandomTwoCards()
-         self.assertTrue(cardA[0] != cardB[0])
+         self.assertTrue(cardA != cardB)
 if __name__ == '__main__':
     unittest.main(verbosity=2)

@@ -26,7 +26,7 @@ class Desk():
         
         playerCard:str = self.getKey(self.cards,numbers.pop())
         houseCard:str = self.getKey(self.cards,numbers.pop())
-        return (playerCard,houseCard)
+        return (playerCard[0],houseCard[0])
 
     def CompareTwoCards(self,cardA:str,cardB:str):
         if self.cards[cardA] > self.cards[cardB]:

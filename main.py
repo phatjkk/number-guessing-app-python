@@ -183,8 +183,7 @@ if __name__ == "__main__":
 
             while(True):
                 # Get 2 cards for Player and House
-                houseCard, playerCard = desk.GetRandomTwoCards()
-                player.card, house.card = playerCard[0],houseCard[0]
+                player.card, house.card = desk.GetRandomTwoCards()
 
                 isPlayerWinRound:bool = RoundFlow(roundNum,player,house,desk)
                 roundNum +=1
