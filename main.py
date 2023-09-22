@@ -3,11 +3,20 @@ import logging
 from desk import Desk
 from house import House
 from player import Player
+from enum import Enum
 
 isHack = False
 
 POINTS_TO_START = 30
 WINNER_POINTS = 1000
+
+
+class Options(Enum):
+    START = CONTINUES = "1"
+    STOP = "2"
+    EXIT = "0"
+    PLAYER_CARD_BIGGER = "1"
+    PLAYER_CARD_SMALLER = "2"
 
 def ClearConsole():
     os.system('cls')
@@ -24,7 +33,7 @@ def HomePage(player:Player):
     print("1. Start Game")
     print("0. Exit")
     option:str = input("Your select:")
-    if option != "0" and option !="1":
+    if option != Options.EXIT.value and option !=Options.START.value:
         raise ValueError("Input must be 0 or 1!")
     return option
 
@@ -49,7 +58,8 @@ def RoundPage(roundNum:int,player:Player,house:House,testValue = None):
         playerGuess = testValue
     else:
         playerGuess:str = input("Type your guess:")
-    if playerGuess != "1" and playerGuess !="2":
+
+    if playerGuess != Options.PLAYER_CARD_BIGGER.value and playerGuess != Options.PLAYER_CARD_SMALLER.value:
         raise ValueError("Input must be 1 or 2!")
     return playerGuess
 
@@ -61,7 +71,7 @@ def WinRoundPage(house:House):
     print("1. Yes")
     print("2. No, back to home!")
     playerOption:str = input("Type your choice:")
-    if playerOption != "1" and playerOption !="2":
+    if playerOption != Options.CONTINUES.value and playerOption !=Options.STOP.value:
         raise ValueError("Input must be 1 or 2!")
     return playerOption
 
@@ -77,12 +87,12 @@ def RoundFlow(roundNum:int,player:Player,house:House,desk:Desk,testValue:str = N
             logging.warning(e) 
             PauseConsole()
 
-        if playerGuess == "1":
+        if playerGuess == Options.PLAYER_CARD_BIGGER.value:
             # Player's Card > House's Card
             if(desk.CompareTwoCards(player.card,house.card) == "A>B"):
                 isPlayerWinRound = True
             break
-        elif playerGuess == "2":
+        elif playerGuess == Options.PLAYER_CARD_SMALLER.value:
             # Player's Card < House's Card
             if(desk.CompareTwoCards(player.card,house.card) == "A<B"):
                 isPlayerWinRound = True
@@ -127,7 +137,7 @@ def WinRoundFlow(house:House,player:Player):
             logging.warning(e) 
             PauseConsole()
 
-        if playerOptionToStopOrContinues == "2":
+        if playerOptionToStopOrContinues == Options.STOP.value:
             # Player want to stop!
             player.points += house.reward
             # Check is WINNER?
@@ -137,7 +147,7 @@ def WinRoundFlow(house:House,player:Player):
                 PauseConsole()
             isPlayerWantToStop = True
             return isPlayerWantToStop
-        elif playerOptionToStopOrContinues == "1":
+        elif playerOptionToStopOrContinues ==  Options.CONTINUES.value:
             # Player want to play next round!
             isPlayerWantToStop = False
             return isPlayerWantToStop
@@ -156,6 +166,8 @@ def CheckPlayerPoints(player:Player):
 
 if __name__ == "__main__":
     player = Player()
+    desk = Desk()
+    house = House()
     while(True):
         ClearConsole()
 
@@ -163,21 +175,19 @@ if __name__ == "__main__":
         option:str = None
         try:
             option = HomePage(player)
-        except Exception as e:
+        except ValueError as e:
             logging.warning(e) 
             PauseConsole()
 
-        if option == "0":
+        if option == Options.EXIT.value:
             # Exit Game
             print("Game Closed! Goodbye!")
             break
-        elif option == "1":
+        elif option == Options.START.value:
             # Start Game
             isEnoughPointToStart:bool = CheckPlayerPoints(player)
             if isEnoughPointToStart == False:
                 break
-            desk = Desk()
-            house = House()
             roundNum = 1
             player.points -= 25
 
