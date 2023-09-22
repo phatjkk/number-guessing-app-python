@@ -1,5 +1,5 @@
 import os
-import logging
+import logging as log
 from desk import Desk
 from house import House
 from player import Player
@@ -17,7 +17,7 @@ def HomeFlow(player:Player):
     try:
         option = HomePage(player)
     except ValueError as e:
-        logging.warning(e) 
+        log.warning(e) 
         PauseConsole()
     return option
 
@@ -80,8 +80,8 @@ def RoundFlow(roundNum:int,player:Player,house:House,desk:Desk,testValue:str = N
         playerGuess:str = None
         try:
             playerGuess = RoundPage(roundNum,player,house,testValue)
-        except Exception as e:
-            logging.warning(e) 
+        except ValueError as e:
+            log.warning(e) 
             PauseConsole()
 
         if playerGuess == Options.PLAYER_CARD_BIGGER.value:
@@ -130,8 +130,8 @@ def WinRoundFlow(house:House,player:Player):
         # Check player input vailid
         try:
             playerOptionToStopOrContinues = WinRoundPage(house)
-        except Exception as e:
-            logging.warning(e) 
+        except ValueError as e:
+            log.warning(e) 
             PauseConsole()
 
         if playerOptionToStopOrContinues == Options.STOP.value:
