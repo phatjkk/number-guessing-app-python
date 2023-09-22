@@ -1,6 +1,7 @@
+from config import Settings
 class Player():
     def __init__(self):
-        self._points:int = 60
+        self._points:int = Settings.PLAYER_START_POINTS.value
         self._card:str = ""
     @property
     def card(self):
